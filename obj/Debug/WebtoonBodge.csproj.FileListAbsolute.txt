@@ -1,0 +1,9 @@
+C:\Users\xokam\source\repos\WebtoonBodge\bin\Debug\WebtoonBodge.exe.config
+C:\Users\xokam\source\repos\WebtoonBodge\bin\Debug\WebtoonBodge.exe
+C:\Users\xokam\source\repos\WebtoonBodge\bin\Debug\WebtoonBodge.pdb
+C:\Users\xokam\source\repos\WebtoonBodge\obj\Debug\WebtoonBodge.Form1.resources
+C:\Users\xokam\source\repos\WebtoonBodge\obj\Debug\WebtoonBodge.Properties.Resources.resources
+C:\Users\xokam\source\repos\WebtoonBodge\obj\Debug\WebtoonBodge.csproj.GenerateResource.cache
+C:\Users\xokam\source\repos\WebtoonBodge\obj\Debug\WebtoonBodge.csproj.CoreCompileInputs.cache
+C:\Users\xokam\source\repos\WebtoonBodge\obj\Debug\WebtoonBodge.exe
+C:\Users\xokam\source\repos\WebtoonBodge\obj\Debug\WebtoonBodge.pdb
