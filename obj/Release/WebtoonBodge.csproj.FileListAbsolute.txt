@@ -1,0 +1,15 @@
+D:\Users\xokam\Desktop\Study\Projects\Cs\WebtoonBodge\bin\Release\WebtoonBodge.exe.config
+D:\Users\xokam\Desktop\Study\Projects\Cs\WebtoonBodge\bin\Release\WebtoonBodge.exe
+D:\Users\xokam\Desktop\Study\Projects\Cs\WebtoonBodge\bin\Release\WebtoonBodge.pdb
+D:\Users\xokam\Desktop\Study\Projects\Cs\WebtoonBodge\obj\Release\WebtoonBodge.Form1.resources
+D:\Users\xokam\Desktop\Study\Projects\Cs\WebtoonBodge\obj\Release\WebtoonBodge.Properties.Resources.resources
+D:\Users\xokam\Desktop\Study\Projects\Cs\WebtoonBodge\obj\Release\WebtoonBodge.csproj.GenerateResource.cache
+D:\Users\xokam\Desktop\Study\Projects\Cs\WebtoonBodge\obj\Release\WebtoonBodge.csproj.CoreCompileInputs.cache
+D:\Users\xokam\Desktop\Study\Projects\Cs\WebtoonBodge\obj\Release\WebtoonBodge.exe
+D:\Users\xokam\Desktop\Study\Projects\Cs\WebtoonBodge\obj\Release\WebtoonBodge.pdb
+D:\Users\xokam\Desktop\Study\Projects\Cs\WebtoonBodge\obj\Release\WebtoonBodge.csprojAssemblyReference.cache
+D:\Users\xokam\Desktop\Study\Projects\Cs\WebtoonBodge\bin\Release\WebtoonBodge.exe.manifest
+D:\Users\xokam\Desktop\Study\Projects\Cs\WebtoonBodge\bin\Release\WebtoonBodge.application
+D:\Users\xokam\Desktop\Study\Projects\Cs\WebtoonBodge\obj\Release\WebtoonBodge.TrustInfo.xml
+D:\Users\xokam\Desktop\Study\Projects\Cs\WebtoonBodge\obj\Release\WebtoonBodge.exe.manifest
+D:\Users\xokam\Desktop\Study\Projects\Cs\WebtoonBodge\obj\Release\WebtoonBodge.application

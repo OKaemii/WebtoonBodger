@@ -28,96 +28,97 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.LBX_images = new System.Windows.Forms.ListBox();
+            this.BTN_refresh = new System.Windows.Forms.Button();
+            this.TB_maxHeight = new System.Windows.Forms.TextBox();
+            this.LB_maxHeight = new System.Windows.Forms.Label();
+            this.BTN_init = new System.Windows.Forms.Button();
+            this.RB_isPNG = new System.Windows.Forms.RadioButton();
+            this.RB_isJPG = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
-            // listBox1
+            // LBX_images
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 16;
-            this.listBox1.Location = new System.Drawing.Point(12, 76);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(276, 356);
-            this.listBox1.TabIndex = 0;
+            this.LBX_images.FormattingEnabled = true;
+            this.LBX_images.ItemHeight = 16;
+            this.LBX_images.Location = new System.Drawing.Point(12, 76);
+            this.LBX_images.Name = "LBX_images";
+            this.LBX_images.Size = new System.Drawing.Size(276, 356);
+            this.LBX_images.TabIndex = 0;
             // 
-            // button1
+            // BTN_refresh
             // 
-            this.button1.Location = new System.Drawing.Point(213, 47);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.Button1_Click);
+            this.BTN_refresh.Location = new System.Drawing.Point(213, 47);
+            this.BTN_refresh.Name = "BTN_refresh";
+            this.BTN_refresh.Size = new System.Drawing.Size(75, 23);
+            this.BTN_refresh.TabIndex = 1;
+            this.BTN_refresh.Text = "refresh";
+            this.BTN_refresh.UseVisualStyleBackColor = true;
+            this.BTN_refresh.Click += new System.EventHandler(this.BTN_refresh_Click);
             // 
-            // textBox1
+            // TB_maxHeight
             // 
-            this.textBox1.Location = new System.Drawing.Point(294, 410);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(127, 22);
-            this.textBox1.TabIndex = 2;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(294, 390);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(46, 17);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "label1";
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(297, 47);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(124, 329);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.Button2_Click);
-            // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(13, 47);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(110, 21);
-            this.radioButton1.TabIndex = 5;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "radioButton1";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            this.radioButton1.CheckedChanged += new System.EventHandler(this.RadioButton1_CheckedChanged);
-            // 
-            // radioButton2
-            // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(13, 20);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(110, 21);
-            this.radioButton2.TabIndex = 6;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "radioButton2";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            this.radioButton2.CheckedChanged += new System.EventHandler(this.RadioButton2_CheckedChanged);
-            // 
-            // Form1
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.TB_maxHeight.Location = new System.Drawing.Point(294, 410);
+            this.TB_maxHeight.Name = "TB_maxHeight";
+            this.TB_maxHeight.Size = new System.Drawing.Size(127, 22);
+            this.TB_maxHeight.Text = "1200";
+            this.TB_maxHeight.TabIndex = 2;
+			// 
+			// LB_maxHeight
+			// 
+			this.LB_maxHeight.AutoSize = true;
+            this.LB_maxHeight.Location = new System.Drawing.Point(294, 390);
+            this.LB_maxHeight.Name = "Lb_maxHeight";
+            this.LB_maxHeight.Size = new System.Drawing.Size(46, 17);
+            this.LB_maxHeight.TabIndex = 3;
+            this.LB_maxHeight.Text = "max height";
+			// 
+			// BTN_init
+			// 
+			this.BTN_init.Location = new System.Drawing.Point(297, 47);
+            this.BTN_init.Name = "BTN_init";
+            this.BTN_init.Size = new System.Drawing.Size(124, 329);
+            this.BTN_init.TabIndex = 4;
+            this.BTN_init.Text = "Init";
+            this.BTN_init.UseVisualStyleBackColor = true;
+            this.BTN_init.Click += new System.EventHandler(this.BTN_init_Click);
+			// 
+			// RB_isPNG
+			// 
+			this.RB_isPNG.AutoSize = true;
+            this.RB_isPNG.Location = new System.Drawing.Point(13, 47);
+            this.RB_isPNG.Name = "RB_isPNG";
+            this.RB_isPNG.Size = new System.Drawing.Size(110, 21);
+            this.RB_isPNG.TabIndex = 5;
+            this.RB_isPNG.TabStop = true;
+            this.RB_isPNG.Text = "PNG";
+            this.RB_isPNG.UseVisualStyleBackColor = true;
+            this.RB_isPNG.CheckedChanged += new System.EventHandler(this.RB_isJPG_CheckedChanged);
+			// 
+			// RB_isJPG
+			// 
+			this.RB_isJPG.AutoSize = true;
+            this.RB_isJPG.Location = new System.Drawing.Point(13, 20);
+            this.RB_isJPG.Name = "RB_isJPG";
+            this.RB_isJPG.Size = new System.Drawing.Size(110, 21);
+            this.RB_isJPG.TabIndex = 6;
+            this.RB_isJPG.TabStop = true;
+            this.RB_isJPG.Text = "JPG";
+            this.RB_isJPG.UseVisualStyleBackColor = true;
+            this.RB_isJPG.CheckedChanged += new System.EventHandler(this.RB_isPNG_CheckedChanged);
+			// 
+			// Form1
+			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(453, 450);
-            this.Controls.Add(this.radioButton2);
-            this.Controls.Add(this.radioButton1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.RB_isJPG);
+            this.Controls.Add(this.RB_isPNG);
+            this.Controls.Add(this.BTN_init);
+            this.Controls.Add(this.LB_maxHeight);
+            this.Controls.Add(this.TB_maxHeight);
+            this.Controls.Add(this.BTN_refresh);
+            this.Controls.Add(this.LBX_images);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "Form1";
@@ -130,13 +131,13 @@
 
         #endregion
 
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.ListBox LBX_images;
+        private System.Windows.Forms.Button BTN_refresh;
+        private System.Windows.Forms.TextBox TB_maxHeight;
+        private System.Windows.Forms.Label LB_maxHeight;
+        private System.Windows.Forms.Button BTN_init;
+        private System.Windows.Forms.RadioButton RB_isPNG;
+        private System.Windows.Forms.RadioButton RB_isJPG;
     }
 }
 

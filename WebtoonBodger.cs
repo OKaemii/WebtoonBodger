@@ -9,101 +9,123 @@ namespace WebtoonBodge
 {
     class WebtoonBodger
     {
-        private DirectoryManager dm = new DirectoryManager();
+        public DirectoryManager dm = new DirectoryManager();
 
         //total images in folder
         private int TOTAL_IMAGES = 0;
         //total collected image height
         private int CANVAS_HEIGHT = 0;
         //path of where files are stored
-        private String PATH_LOC = "";
+        private string PATH_LOC = "";
 
         //constructor
-        public WebtoonBodger(String dir, String output = "")
+        public WebtoonBodger(string dir, string output = "")
         {
             this.PATH_LOC = dir;
             if (!output.Equals(""))
             {
-                dm.setOutputFolderName(output);
+                dm.outputFolderName = output;
             }
-            dm.createLocalDir(dm.getOutputFolderName());
+            dm.createLocalDir(dm.outputFolderName);
         }
 
-        public void initialise(int max_height = 200, String ext = ".png")
+        public void initialise(int max_height, string ext = ".png")
         {
-            dm.setExtension(ext);
+            dm.extension = ext;
             //if no output folder, create one
-            dm.createLocalDir(dm.getOutputFolderName());
+            dm.createLocalDir(dm.outputFolderName);
 
             //KABAMAMAMAMAMMABAM
-            if (dm.validateFolder(dm.getOutputFolderName()))
+            if (dm.validateFolder(dm.outputFolderName))
             {
                 FixHeight(mergeAll(PATH_LOC), max_height);
             }
         }
 
-        private Boolean FixHeight(Image srcImg, int maxHeight)
+        private void FixHeight(Bitmap srcImg, int maxHeight)
         {
+            Console.WriteLine("To do: {0}", srcImg.Height);
+            //page counter
+            int pageNumber = 0;
             //current spot to draw from
-            int current_height = 0;
+            int currentHeight = 0;
 
             //currently remaining is entire height of src image 
-            int remainingHeight = srcImg.Height;
+            int remainingHeight = srcImg.Height -1;
 
             //if entire image already fits max
             if (remainingHeight <= maxHeight)
             {
-                srcImg.Save(dm.getOutputFolderName() + "/" + dm.getOutputPageName() + "00" + dm.getExtension());
-                return true;
+                srcImg.Save(dm.outputFolderName + "/" + dm.outputPageName + "00" + dm.extension);
+                srcImg.Dispose(); // GDI+ Encountered a generic error
+                return;
             }
 
             //image properties, //image height is variable
             int canvas_width = srcImg.Width;
 
-            //create new image slots for collection
-            double calc = (double) remainingHeight / maxHeight;
-            int chunks = Convert.ToInt32(Math.Ceiling(calc));
-            Image[] imgs = new Image[chunks];
-
-            for (int i = 0; i < chunks; i++)
+            ////create new image slots for collection
+            //double calc = (double) remainingHeight / maxHeight;
+            //int chunks = Convert.ToInt32(Math.Ceiling(calc));
+            //Image[] imgs = new Image[chunks];
+            while (remainingHeight > 0)
             {
                 if (remainingHeight <= maxHeight)
                 {
                     maxHeight = remainingHeight;
                 }
+                //current bottom line
+                int cutHeight = currentHeight + maxHeight;
+                Console.WriteLine("Cutting page {0}, current{1}, cutting_from{2}", pageNumber, currentHeight, cutHeight);
+                //while it's a panel
+                while (!isLineOneColour(srcImg, cutHeight))
+                {
+                    cutHeight--;
+                    if (cutHeight == currentHeight + (maxHeight/2))
+                    {
+                        cutHeight = currentHeight + maxHeight;
+                        for (int i = cutHeight; i < srcImg.Height - 1 && !isLineOneColour(srcImg, cutHeight) ; i++)
+                        {
+                            cutHeight = i;
+                        }
+                    }
+                }
+
 
                 //our dimensions
-                imgs[i] = new Bitmap(canvas_width, maxHeight);
+                Bitmap img = new Bitmap(canvas_width, cutHeight - currentHeight);
 
                 //draw onto canvas
-                using (Graphics drawTool = Graphics.FromImage(imgs[i]))
+                using (Graphics drawTool = Graphics.FromImage(img))
                 {
                     //make sure it HQ
                     drawTool.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
                     //current spot to draw from
-                    drawTool.DrawImage(srcImg, new Rectangle(0, 0, imgs[i].Width, imgs[i].Height), new Rectangle(0, current_height, imgs[i].Width, imgs[i].Height), GraphicsUnit.Pixel);
-                    current_height = maxHeight + current_height;
-                    remainingHeight = remainingHeight - imgs[i].Height;
+                    Console.WriteLine("creating image");
+                    drawTool.DrawImage(srcImg, new Rectangle(0, 0, img.Width, img.Height), new Rectangle(0, currentHeight, img.Width, img.Height), GraphicsUnit.Pixel);
+                    Console.WriteLine("image created");
+                    currentHeight += img.Height;
+                    remainingHeight -= img.Height;
 
                     drawTool.Flush();
-                    if (dm.getExtension().ToLower().Equals(".png"))
+                    if (dm.extension.ToLower().Equals(".png"))
                     {
-                        imgs[i].Save(dm.getOutputFolderName() + "/page_" + i + dm.getExtension(), System.Drawing.Imaging.ImageFormat.Png);
-                    }else if (dm.getExtension().ToLower().Equals(".jpg") || dm.getExtension().ToLower().Equals(".jpeg"))
-                    {
-                        imgs[i].Save(dm.getOutputFolderName() + "/page_" + i + dm.getExtension(), System.Drawing.Imaging.ImageFormat.Jpeg);
+                        img.Save(dm.outputFolderName + "/page_" + pageNumber++ + dm.extension, System.Drawing.Imaging.ImageFormat.Png);
                     }
-                    
-                    imgs[i].Dispose();
+                    else if (dm.extension.ToLower().Equals(".jpg") || dm.extension.ToLower().Equals(".jpeg"))
+                    {
+                        img.Save(dm.outputFolderName + "/page_" + pageNumber++ + dm.extension, System.Drawing.Imaging.ImageFormat.Jpeg);
+                    }
+
+                    img.Dispose();
                     drawTool.Dispose();
                 }
             }
-            return true;
         }
 
         //merge all .png/.jpeg files in a directory into a super image
         //returns the super image
-        private Image mergeAll(String dir)
+        private Bitmap mergeAll(string dir)
         {
             //create a new set of images, where n of set is number of .png in dir
             TOTAL_IMAGES = dm.ProcessDirectory(dir).Length;
@@ -113,6 +135,7 @@ namespace WebtoonBodge
                 int i = 0; //index
                 foreach (string fileName in dm.ProcessDirectory(dir))    //debug
                 {
+                    Console.WriteLine("merging {0}", fileName);
                     imgs[i] = Image.FromFile(fileName);
 
                     //get the total height of all images
@@ -139,9 +162,8 @@ namespace WebtoonBodge
             for (int i = 0; i < TOTAL_IMAGES; i++)
             {
                 drawTool.DrawImage(imgs[i], new Rectangle(0, current_height, imgs[i].Width, imgs[i].Height), new Rectangle(0, 0, imgs[i].Width, imgs[i].Height), GraphicsUnit.Pixel);
-                current_height = imgs[i].Height + current_height;
+                current_height += imgs[i].Height;
             }
-
 
             drawTool.Flush();
             drawTool.Save();
@@ -154,39 +176,29 @@ namespace WebtoonBodge
             return canvas;
         }
 
-        public String[] getQueue()
+        private bool isLineOneColour(Bitmap bmp, int lineNumber)
         {
-            String[] q = dm.ProcessDirectory(PATH_LOC);
-            return q;
-        }
-
-        public String getPathLoc()
-        {
-            return this.PATH_LOC;
-        }
-
-        public void setPathLoc(String loc)
-        {
-            this.PATH_LOC = loc;
-        }
-        public void setPageName(String name)
-        {
-            dm.setOutputPageName(name);
-        }
-
-        public void setOutPutFolderName(String name)
-        {
-            dm.setOutputFolderName(name);
-        }
-
-        public String getExtension()
-        {
-            return dm.getExtension();
-        }
-
-        public void setExtension(String ext)
-        {
-            dm.setExtension(ext);
+            //int threshold = 2;
+            //Color lineColor = bmp.GetPixel(0, lineNumber);
+            //for (int x = 1; x < bmp.Width; x++)
+            //{
+            //    Color currentPixel = bmp.GetPixel(x, lineNumber);
+            //    if (Math.Abs(lineColor.R - currentPixel.R) < threshold && Math.Abs(lineColor.G - currentPixel.G) <threshold && Math.Abs(lineColor.B - currentPixel.B) < threshold)
+            //    {
+            //        return false;
+            //    }
+            //}
+            //return true;
+            Color lineColor = bmp.GetPixel(0, lineNumber);
+            for (int x = 1; x < bmp.Width; x++)
+            {
+                Color currentPixel = bmp.GetPixel(x, lineNumber);
+                if (lineColor != currentPixel)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

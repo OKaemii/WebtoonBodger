@@ -8,10 +8,53 @@ namespace WebtoonBodge
 {
     class DirectoryManager
     {
-        private String extension = ".png";
-        private String outputFolderName = "_output";
-        private String outputPageName = "page_";
-        public Boolean createLocalDir(String nameOfFolder)
+		public bool willRename = false;
+
+		private string Extension = ".png";
+		public string extension
+		{
+			get
+			{
+				return Extension;
+			}
+			set
+			{
+				if(!value.StartsWith(".")) return;
+				Extension = value;
+			}
+		}
+
+		private string OutputPageName = "page_";
+		public string outputPageName
+		{
+			get
+			{
+				return OutputPageName;
+			}
+			set
+			{
+				OutputPageName = value;
+			}
+		}
+
+		private string OutputFolderName = "_output";
+		public string outputFolderName
+		{
+			get
+			{
+				return OutputFolderName;
+			}
+			set
+			{
+				if (willRename)
+				{
+					System.IO.Directory.Move(OutputFolderName, value);
+				}
+				OutputFolderName = value;
+			}
+		}
+
+        public bool createLocalDir(string nameOfFolder)
         {
             // Specify the directory you want to manipulate.
             //path = @"c:\MyDir";
@@ -59,7 +102,7 @@ namespace WebtoonBodge
         }
 
         //make sure given path is a valid folder
-        public Boolean validateFolder(String path)
+        public bool validateFolder(string path)
         {
             if (System.IO.File.Exists(path))
             {
@@ -78,48 +121,6 @@ namespace WebtoonBodge
                 Console.WriteLine("{0} is not a valid path.", path);
                 return false;
             }
-        }
-
-        public String getOutputFolderName()
-        {
-            return outputFolderName;
-        }
-
-        //changes the folder for output. If (name,OPTIONAL true), renames the previous folder to new
-        public void setOutputFolderName(String name, Boolean rename = false)
-        {
-            if (rename)
-            {
-                System.IO.Directory.Move(outputFolderName, name);
-            }
-            outputFolderName = name;
-        }
-
-        public String getOutputPageName()
-        {
-            return outputPageName;
-        }
-
-        public void setOutputPageName(String name)
-        {
-            outputPageName = name;
-        }
-
-        public String getExtension()
-        {
-            return extension;
-        }
-
-        public Boolean setExtension(String ext)
-        {
-            if (ext.StartsWith("."))
-            {
-                Console.WriteLine("{0} ->> {1}", this.extension, ext);
-                this.extension = ext;
-                return true;
-            }
-            Console.WriteLine("error occured, not correct format");
-            return false;
         }
     }
 }

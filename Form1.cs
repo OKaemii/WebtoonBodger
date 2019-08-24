@@ -9,12 +9,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using mshtml;
 
 namespace WebtoonBodge
 {
     public partial class Form1 : Form
     {
-        WebtoonBodger wb = new WebtoonBodger(System.IO.Directory.GetCurrentDirectory());
+        readonly WebtoonBodger wb = new WebtoonBodger(System.IO.Directory.GetCurrentDirectory());
         public Form1()
         {
             InitializeComponent();
@@ -22,48 +23,43 @@ namespace WebtoonBodge
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            button1.Text = "refresh";
-            button2.Text = "CONVERT!";
-            label1.Text = "max height";
-            textBox1.Text = "1200";
-            radioButton1.Checked = true;
-
-            radioButton1.Text = ".png";
-            radioButton2.Text = ".jpeg";
+			RB_isPNG.Checked = true;
+			RB_isJPG.Checked = false;
         }
 
-        private void Button1_Click(object sender, EventArgs e)
+        private void BTN_refresh_Click(object sender, EventArgs e)
         {
-            listBox1.Items.Clear();
+            LBX_images.Items.Clear();
 
-            foreach (String entry in wb.getQueue())
+            foreach (String entry in wb.dm.ProcessDirectory(Directory.GetCurrentDirectory()))
             {
-                listBox1.Items.Add(entry);
+                LBX_images.Items.Add(entry);
             }
 
-            Console.WriteLine(wb.getExtension());
+            Console.WriteLine(wb.dm.extension);
         }
 
-        private void Button2_Click(object sender, EventArgs e)
+        private void BTN_init_Click(object sender, EventArgs e)
         {
-            wb.initialise(Convert.ToInt32(textBox1.Text), wb.getExtension());
-            button2.Enabled = false;
+            wb.initialise(Convert.ToInt32(TB_maxHeight.Text), wb.dm.extension);
+            BTN_init.Enabled = false;
+            MessageBox.Show("Operation est fini");
         }
 
-        private void RadioButton2_CheckedChanged(object sender, EventArgs e)
+        private void RB_isJPG_CheckedChanged(object sender, EventArgs e)
         {
-            if (radioButton2.Checked)
+            if (RB_isJPG.Checked)
             {
-                wb.setExtension(".jpg");
+                wb.dm.extension = ".jpg";
                 return;
             }
         }
 
-        private void RadioButton1_CheckedChanged(object sender, EventArgs e)
+        private void RB_isPNG_CheckedChanged(object sender, EventArgs e)
         {
-            if (radioButton1.Checked)
+            if (RB_isPNG.Checked)
             {
-                wb.setExtension(".png");
+                wb.dm.extension = ".png";
                 return;
             }
         }
