@@ -41,7 +41,7 @@ namespace WebtoonBodge
 
         private void BTN_init_Click(object sender, EventArgs e)
         {
-            wb.initialise(Convert.ToInt32(TB_maxHeight.Text), wb.dm.extension);
+            wb.Initialise(Convert.ToInt32(TB_maxHeight.Text), wb.dm.extension);
             BTN_init.Enabled = false;
             MessageBox.Show("Operation est fini");
         }

@@ -16,7 +16,7 @@ namespace WebtoonBodge
         //total collected image height
         private int CANVAS_HEIGHT = 0;
         //path of where files are stored
-        private string PATH_LOC = "";
+        private readonly string PATH_LOC = "";
 
         //constructor
         public WebtoonBodger(string dir, string output = "")
@@ -29,7 +29,7 @@ namespace WebtoonBodge
             dm.createLocalDir(dm.outputFolderName);
         }
 
-        public void initialise(int max_height, string ext = ".png")
+        public void Initialise(int max_height, string ext = ".png")
         {
             dm.extension = ext;
             //if no output folder, create one
@@ -38,7 +38,7 @@ namespace WebtoonBodge
             //KABAMAMAMAMAMMABAM
             if (dm.validateFolder(dm.outputFolderName))
             {
-                FixHeight(mergeAll(PATH_LOC), max_height);
+                FixHeight(MergeAll(PATH_LOC), max_height);
             }
         }
 
@@ -51,7 +51,7 @@ namespace WebtoonBodge
             int currentHeight = 0;
 
             //currently remaining is entire height of src image 
-            int remainingHeight = srcImg.Height -1;
+            int remainingHeight = srcImg.Height - 1;
 
             //if entire image already fits max
             if (remainingHeight <= maxHeight)
@@ -64,10 +64,6 @@ namespace WebtoonBodge
             //image properties, //image height is variable
             int canvas_width = srcImg.Width;
 
-            ////create new image slots for collection
-            //double calc = (double) remainingHeight / maxHeight;
-            //int chunks = Convert.ToInt32(Math.Ceiling(calc));
-            //Image[] imgs = new Image[chunks];
             while (remainingHeight > 0)
             {
                 if (remainingHeight <= maxHeight)
@@ -77,20 +73,27 @@ namespace WebtoonBodge
                 //current bottom line
                 int cutHeight = currentHeight + maxHeight;
                 Console.WriteLine("Cutting page {0}, current{1}, cutting_from{2}", pageNumber, currentHeight, cutHeight);
-                //while it's a panel
-                while (!isLineOneColour(srcImg, cutHeight))
+                if (maxHeight != remainingHeight)
                 {
-                    cutHeight--;
-                    if (cutHeight == currentHeight + (maxHeight/2))
+                    //while it's a panel
+                    while (DoesLineContainDifferentColours(srcImg, cutHeight))
                     {
-                        cutHeight = currentHeight + maxHeight;
-                        for (int i = cutHeight; i < srcImg.Height - 1 && !isLineOneColour(srcImg, cutHeight) ; i++)
+                        cutHeight--;
+                        if (cutHeight == currentHeight + (maxHeight / 2))
                         {
-                            cutHeight = i;
+                            cutHeight = currentHeight + maxHeight;
+                            for (int i = cutHeight; i < srcImg.Height - 1 && DoesLineContainDifferentColours(srcImg, cutHeight); i++)
+                            {
+                                if ((cutHeight) == srcImg.Height)
+                                {
+                                    break;
+                                }
+                                cutHeight = i;
+                            }
+                            break;
                         }
                     }
                 }
-
 
                 //our dimensions
                 Bitmap img = new Bitmap(canvas_width, cutHeight - currentHeight);
@@ -110,11 +113,11 @@ namespace WebtoonBodge
                     drawTool.Flush();
                     if (dm.extension.ToLower().Equals(".png"))
                     {
-                        img.Save(dm.outputFolderName + "/page_" + pageNumber++ + dm.extension, System.Drawing.Imaging.ImageFormat.Png);
+                        img.Save(dm.outputFolderName + "/page_" + (pageNumber++).ToString("00") + dm.extension, System.Drawing.Imaging.ImageFormat.Png);
                     }
                     else if (dm.extension.ToLower().Equals(".jpg") || dm.extension.ToLower().Equals(".jpeg"))
                     {
-                        img.Save(dm.outputFolderName + "/page_" + pageNumber++ + dm.extension, System.Drawing.Imaging.ImageFormat.Jpeg);
+                        img.Save(dm.outputFolderName + "/page_" + (pageNumber++).ToString("00") + dm.extension, System.Drawing.Imaging.ImageFormat.Jpeg);
                     }
 
                     img.Dispose();
@@ -125,7 +128,7 @@ namespace WebtoonBodge
 
         //merge all .png/.jpeg files in a directory into a super image
         //returns the super image
-        private Bitmap mergeAll(string dir)
+        private Bitmap MergeAll(string dir)
         {
             //create a new set of images, where n of set is number of .png in dir
             TOTAL_IMAGES = dm.ProcessDirectory(dir).Length;
@@ -176,29 +179,31 @@ namespace WebtoonBodge
             return canvas;
         }
 
-        private bool isLineOneColour(Bitmap bmp, int lineNumber)
+        private bool DoesLineContainDifferentColours(Bitmap bmp, int lineNumber)
         {
-            //int threshold = 2;
-            //Color lineColor = bmp.GetPixel(0, lineNumber);
-            //for (int x = 1; x < bmp.Width; x++)
-            //{
-            //    Color currentPixel = bmp.GetPixel(x, lineNumber);
-            //    if (Math.Abs(lineColor.R - currentPixel.R) < threshold && Math.Abs(lineColor.G - currentPixel.G) <threshold && Math.Abs(lineColor.B - currentPixel.B) < threshold)
-            //    {
-            //        return false;
-            //    }
-            //}
-            //return true;
+            int threshold = 25;
             Color lineColor = bmp.GetPixel(0, lineNumber);
             for (int x = 1; x < bmp.Width; x++)
             {
                 Color currentPixel = bmp.GetPixel(x, lineNumber);
-                if (lineColor != currentPixel)
+                if (Math.Abs(lineColor.R - currentPixel.R) > threshold ||
+                    Math.Abs(lineColor.G - currentPixel.G) > threshold ||
+                    Math.Abs(lineColor.B - currentPixel.B) > threshold)
                 {
-                    return false;
+                    return true;
                 }
             }
-            return true;
+            return false;
+            //    Color lineColor = bmp.GetPixel(0, lineNumber);
+            //    for (int x = 1; x < bmp.Width; x++)
+            //    {
+            //        Color currentPixel = bmp.GetPixel(x, lineNumber);
+            //        if (lineColor != currentPixel)
+            //        {
+            //            return false;
+            //        }
+            //    }
+            //    return true;
         }
     }
 }

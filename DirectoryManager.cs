@@ -37,7 +37,7 @@ namespace WebtoonBodge
 			}
 		}
 
-		private string OutputFolderName = "_output";
+		private string OutputFolderName = "_cropped";
 		public string outputFolderName
 		{
 			get
