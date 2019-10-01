@@ -10,7 +10,8 @@ namespace WebtoonBodge
     {
 		public bool willRename = false;
 
-		private string Extension = ".png";
+
+        private string Extension = ".png";
 		public string extension
 		{
 			get
@@ -57,7 +58,7 @@ namespace WebtoonBodge
         public bool createLocalDir(string nameOfFolder)
         {
             // Specify the directory you want to manipulate.
-            //path = @"c:\MyDir";
+            // path = @"c:\MyDir";
             String path = nameOfFolder + "/";
 
             try
@@ -66,7 +67,7 @@ namespace WebtoonBodge
                 {
                     // Try to create the directory.
                     System.IO.DirectoryInfo di = System.IO.Directory.CreateDirectory(path);
-                    //Console.WriteLine("The directory was created successfully at {0}.", System.IO.Directory.GetCreationTime(path));
+                    // Console.WriteLine("The directory was created successfully at {0}.", System.IO.Directory.GetCreationTime(path));
                     return true;
 
                     #region validateFolderDeleteFeature
@@ -101,19 +102,19 @@ namespace WebtoonBodge
             #endregion
         }
 
-        //make sure given path is a valid folder
+        // make sure given path is a valid folder
         public bool validateFolder(string path)
         {
             if (System.IO.File.Exists(path))
             {
                 // This path is a file
-                //Console.WriteLine(path);
+                // Console.WriteLine(path);
                 return false;
             }
             else if (System.IO.Directory.Exists(path))
             {
                 // This path is a directory
-                //Console.WriteLine(path);
+                // Console.WriteLine(path);
                 return true;
             }
             else

@@ -35,15 +35,20 @@
             this.BTN_init = new System.Windows.Forms.Button();
             this.RB_isPNG = new System.Windows.Forms.RadioButton();
             this.RB_isJPG = new System.Windows.Forms.RadioButton();
+            this.BTN_UpArrow = new System.Windows.Forms.Button();
+            this.BTN_DownArrow = new System.Windows.Forms.Button();
+            this.BTN_Apply = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // LBX_images
             // 
             this.LBX_images.FormattingEnabled = true;
+            this.LBX_images.HorizontalScrollbar = true;
+            this.LBX_images.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.LBX_images.ItemHeight = 16;
             this.LBX_images.Location = new System.Drawing.Point(12, 76);
             this.LBX_images.Name = "LBX_images";
-            this.LBX_images.Size = new System.Drawing.Size(276, 356);
+            this.LBX_images.Size = new System.Drawing.Size(276, 244);
             this.LBX_images.TabIndex = 0;
             // 
             // BTN_refresh
@@ -58,60 +63,93 @@
             // 
             // TB_maxHeight
             // 
-            this.TB_maxHeight.Location = new System.Drawing.Point(294, 410);
+            this.TB_maxHeight.Location = new System.Drawing.Point(314, 410);
             this.TB_maxHeight.Name = "TB_maxHeight";
             this.TB_maxHeight.Size = new System.Drawing.Size(127, 22);
-            this.TB_maxHeight.Text = "1200";
             this.TB_maxHeight.TabIndex = 2;
-			// 
-			// LB_maxHeight
-			// 
-			this.LB_maxHeight.AutoSize = true;
-            this.LB_maxHeight.Location = new System.Drawing.Point(294, 390);
-            this.LB_maxHeight.Name = "Lb_maxHeight";
-            this.LB_maxHeight.Size = new System.Drawing.Size(46, 17);
+            this.TB_maxHeight.Text = "1200";
+            // 
+            // LB_maxHeight
+            // 
+            this.LB_maxHeight.AutoSize = true;
+            this.LB_maxHeight.Location = new System.Drawing.Point(314, 390);
+            this.LB_maxHeight.Name = "LB_maxHeight";
+            this.LB_maxHeight.Size = new System.Drawing.Size(76, 17);
             this.LB_maxHeight.TabIndex = 3;
             this.LB_maxHeight.Text = "max height";
-			// 
-			// BTN_init
-			// 
-			this.BTN_init.Location = new System.Drawing.Point(297, 47);
+            // 
+            // BTN_init
+            // 
+            this.BTN_init.Location = new System.Drawing.Point(317, 47);
             this.BTN_init.Name = "BTN_init";
             this.BTN_init.Size = new System.Drawing.Size(124, 329);
             this.BTN_init.TabIndex = 4;
             this.BTN_init.Text = "Init";
             this.BTN_init.UseVisualStyleBackColor = true;
             this.BTN_init.Click += new System.EventHandler(this.BTN_init_Click);
-			// 
-			// RB_isPNG
-			// 
-			this.RB_isPNG.AutoSize = true;
+            // 
+            // RB_isPNG
+            // 
+            this.RB_isPNG.AutoSize = true;
             this.RB_isPNG.Location = new System.Drawing.Point(13, 47);
             this.RB_isPNG.Name = "RB_isPNG";
-            this.RB_isPNG.Size = new System.Drawing.Size(110, 21);
+            this.RB_isPNG.Size = new System.Drawing.Size(59, 21);
             this.RB_isPNG.TabIndex = 5;
             this.RB_isPNG.TabStop = true;
             this.RB_isPNG.Text = "PNG";
             this.RB_isPNG.UseVisualStyleBackColor = true;
             this.RB_isPNG.CheckedChanged += new System.EventHandler(this.RB_isJPG_CheckedChanged);
-			// 
-			// RB_isJPG
-			// 
-			this.RB_isJPG.AutoSize = true;
+            // 
+            // RB_isJPG
+            // 
+            this.RB_isJPG.AutoSize = true;
             this.RB_isJPG.Location = new System.Drawing.Point(13, 20);
             this.RB_isJPG.Name = "RB_isJPG";
-            this.RB_isJPG.Size = new System.Drawing.Size(110, 21);
+            this.RB_isJPG.Size = new System.Drawing.Size(56, 21);
             this.RB_isJPG.TabIndex = 6;
             this.RB_isJPG.TabStop = true;
             this.RB_isJPG.Text = "JPG";
             this.RB_isJPG.UseVisualStyleBackColor = true;
             this.RB_isJPG.CheckedChanged += new System.EventHandler(this.RB_isPNG_CheckedChanged);
-			// 
-			// Form1
-			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            // 
+            // BTN_UpArrow
+            // 
+            this.BTN_UpArrow.Location = new System.Drawing.Point(294, 76);
+            this.BTN_UpArrow.Name = "BTN_UpArrow";
+            this.BTN_UpArrow.Size = new System.Drawing.Size(17, 94);
+            this.BTN_UpArrow.TabIndex = 7;
+            this.BTN_UpArrow.Text = "˄";
+            this.BTN_UpArrow.UseVisualStyleBackColor = true;
+            this.BTN_UpArrow.Click += new System.EventHandler(this.BTN_UpArrow_Click);
+            // 
+            // BTN_DownArrow
+            // 
+            this.BTN_DownArrow.Location = new System.Drawing.Point(294, 225);
+            this.BTN_DownArrow.Name = "BTN_DownArrow";
+            this.BTN_DownArrow.Size = new System.Drawing.Size(17, 95);
+            this.BTN_DownArrow.TabIndex = 8;
+            this.BTN_DownArrow.Text = "˅";
+            this.BTN_DownArrow.UseVisualStyleBackColor = true;
+            this.BTN_DownArrow.Click += new System.EventHandler(this.BTN_DownArrow_Click);
+            // 
+            // BTN_Apply
+            // 
+            this.BTN_Apply.Location = new System.Drawing.Point(10, 335);
+            this.BTN_Apply.Name = "BTN_Apply";
+            this.BTN_Apply.Size = new System.Drawing.Size(298, 97);
+            this.BTN_Apply.TabIndex = 9;
+            this.BTN_Apply.Text = "APPLY";
+            this.BTN_Apply.UseVisualStyleBackColor = true;
+            this.BTN_Apply.Click += new System.EventHandler(this.BTN_Apply_Click);
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(453, 450);
+            this.Controls.Add(this.BTN_Apply);
+            this.Controls.Add(this.BTN_DownArrow);
+            this.Controls.Add(this.BTN_UpArrow);
             this.Controls.Add(this.RB_isJPG);
             this.Controls.Add(this.RB_isPNG);
             this.Controls.Add(this.BTN_init);
@@ -131,13 +169,16 @@
 
         #endregion
 
-        private System.Windows.Forms.ListBox LBX_images;
+        public System.Windows.Forms.ListBox LBX_images;
         private System.Windows.Forms.Button BTN_refresh;
         private System.Windows.Forms.TextBox TB_maxHeight;
         private System.Windows.Forms.Label LB_maxHeight;
         private System.Windows.Forms.Button BTN_init;
         private System.Windows.Forms.RadioButton RB_isPNG;
         private System.Windows.Forms.RadioButton RB_isJPG;
+        private System.Windows.Forms.Button BTN_UpArrow;
+        private System.Windows.Forms.Button BTN_DownArrow;
+        private System.Windows.Forms.Button BTN_Apply;
     }
 }
 

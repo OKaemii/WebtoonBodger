@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="WebtoonBodge.exe" size="15432">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="WebtoonBodge.exe" size="16456">
       <assemblyIdentity name="WebtoonBodge" version="1.0.0.0" publicKeyToken="89AEA640913A7BD1" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>WrLLlzmvRfsL6m0jvseP5nRYTz2ScJwq/jqhhWffIgA=</dsig:DigestValue>
+        <dsig:DigestValue>WNcV0Xbs5BfNIl99kgpf0hUapu8zio9BmYM6/YCbZcc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
