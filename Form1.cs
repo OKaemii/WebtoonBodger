@@ -98,11 +98,6 @@ namespace WebtoonBodge
             MoveItem(1);
         }
 
-        private void BTN_Apply_Click(object sender, EventArgs e)
-        {
-            
-        }
-
         readonly DirectoryManager dm = new DirectoryManager();
 
         //total images in folder
@@ -128,11 +123,13 @@ namespace WebtoonBodge
 
         private void FixHeight(Bitmap srcImg, int maxHeight)
         {
+            int page = 0;
             Console.WriteLine("To do: {0}", srcImg.Height);
-            //page counter
-            int pageNumber = 0;
+
             //current spot to draw from
             int currentHeight = 0;
+
+            int pageNumber = 0;
 
             //currently remaining is entire height of src image 
             int remainingHeight = srcImg.Height - 1;
@@ -156,7 +153,7 @@ namespace WebtoonBodge
                 }
                 //current bottom line
                 int cutHeight = currentHeight + maxHeight;
-                Console.WriteLine("Cutting page {0}, current{1}, cutting_from{2}", pageNumber, currentHeight, cutHeight);
+                Console.WriteLine("Cutting page {0}, current{1}, cutting_from{2}", page, currentHeight, cutHeight);
                 if (maxHeight != remainingHeight)
                 {
                     //while it's a panel
@@ -194,14 +191,24 @@ namespace WebtoonBodge
                     currentHeight += img.Height;
                     remainingHeight -= img.Height;
 
+                    for (int i = page; i<entriesH.Length; i++)
+                    {
+                        if (entriesH[page] > currentHeight)
+                        {
+                            break;
+                        }
+                        page++;
+                    }
+
+                    
                     drawTool.Flush();
                     if (dm.extension.ToLower().Equals(".png"))
                     {
-                        img.Save(dm.outputFolderName + "/page_" + (pageNumber++).ToString("00") + dm.extension, System.Drawing.Imaging.ImageFormat.Png);
+                        img.Save(dm.outputFolderName + "/" + Path.GetFileName(LBX_images.Items[page].ToString()) + (pageNumber++).ToString("00") + dm.extension, System.Drawing.Imaging.ImageFormat.Png);
                     }
                     else if (dm.extension.ToLower().Equals(".jpg") || dm.extension.ToLower().Equals(".jpeg"))
                     {
-                        img.Save(dm.outputFolderName + "/page_" + (pageNumber++).ToString("00") + dm.extension, System.Drawing.Imaging.ImageFormat.Jpeg);
+                        img.Save(dm.outputFolderName + "/" + Path.GetFileName(LBX_images.Items[page].ToString()) + (pageNumber++).ToString("00") + dm.extension, System.Drawing.Imaging.ImageFormat.Jpeg);
                     }
 
                     img.Dispose();
@@ -210,6 +217,8 @@ namespace WebtoonBodge
             }
         }
 
+        public int[] entriesH;
+
         //merge all .png/.jpeg files in a directory into a super image
         //returns the super image
         private Bitmap MergeAll(string dir)
@@ -217,6 +226,9 @@ namespace WebtoonBodge
             //create a new set of images, where n of set is number of .png in dir
             TOTAL_IMAGES = dm.ProcessDirectory(dir).Length;
             Image[] imgs = new Image[TOTAL_IMAGES];
+
+            entriesH = new int[LBX_images.Items.Count];
+
             //store each .png into each image
             {
                 int i = 0; //index
@@ -224,10 +236,18 @@ namespace WebtoonBodge
                 {
                     Console.WriteLine("merging {0}", fileName);
                     imgs[i] = Image.FromFile(fileName.ToString());
-
+                    entriesH[i] = imgs[i].Height;
                     //get the total height of all images
                     CANVAS_HEIGHT = imgs[i].Height + CANVAS_HEIGHT;
                     i++; //next img
+                }
+            }
+
+            if (entriesH.Length != 0)
+            {
+                for (int i = 0; i < entriesH.Length - 1; i++)
+                {
+                    entriesH[i + 1] = entriesH[i] + entriesH[i + 1];
                 }
             }
 

@@ -37,7 +37,6 @@
             this.RB_isJPG = new System.Windows.Forms.RadioButton();
             this.BTN_UpArrow = new System.Windows.Forms.Button();
             this.BTN_DownArrow = new System.Windows.Forms.Button();
-            this.BTN_Apply = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // LBX_images
@@ -48,7 +47,7 @@
             this.LBX_images.ItemHeight = 16;
             this.LBX_images.Location = new System.Drawing.Point(12, 76);
             this.LBX_images.Name = "LBX_images";
-            this.LBX_images.Size = new System.Drawing.Size(276, 244);
+            this.LBX_images.Size = new System.Drawing.Size(276, 356);
             this.LBX_images.TabIndex = 0;
             // 
             // BTN_refresh
@@ -132,22 +131,11 @@
             this.BTN_DownArrow.UseVisualStyleBackColor = true;
             this.BTN_DownArrow.Click += new System.EventHandler(this.BTN_DownArrow_Click);
             // 
-            // BTN_Apply
-            // 
-            this.BTN_Apply.Location = new System.Drawing.Point(10, 335);
-            this.BTN_Apply.Name = "BTN_Apply";
-            this.BTN_Apply.Size = new System.Drawing.Size(298, 97);
-            this.BTN_Apply.TabIndex = 9;
-            this.BTN_Apply.Text = "APPLY";
-            this.BTN_Apply.UseVisualStyleBackColor = true;
-            this.BTN_Apply.Click += new System.EventHandler(this.BTN_Apply_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(453, 450);
-            this.Controls.Add(this.BTN_Apply);
             this.Controls.Add(this.BTN_DownArrow);
             this.Controls.Add(this.BTN_UpArrow);
             this.Controls.Add(this.RB_isJPG);
@@ -178,7 +166,6 @@
         private System.Windows.Forms.RadioButton RB_isJPG;
         private System.Windows.Forms.Button BTN_UpArrow;
         private System.Windows.Forms.Button BTN_DownArrow;
-        private System.Windows.Forms.Button BTN_Apply;
     }
 }
 
